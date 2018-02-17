@@ -1,0 +1,19 @@
+---
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Install MongoDB.
+  package: name={{ mongo_package }} state={{ mongo_package_state }}
+
+- name: Install MongoDBServer
+  package: name={{ mongoserver_package }} state={{ mongoserver_package_state }}
+
+- name: Ensure Mongo is started and enabled at boot.
+  service:
+    name: mongod
+    state: started
+    enabled: yes
+

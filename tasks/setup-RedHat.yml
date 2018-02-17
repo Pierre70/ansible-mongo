@@ -1,0 +1,9 @@
+---
+- name: Ensure old versions of MongoDb are not installed.
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - mongodb
+    - mongodb-server
+
